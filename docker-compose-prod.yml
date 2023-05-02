@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: prod
+    command: npm run start
+    ports:
+      - "3000:80"
+    volumes:
+      - .:/app
+    environment:
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/link-shortener
+    links:
+      - mongo
+  mongo:
+    image: mongo:4.4.21
+    volumes:
+      - mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
+
+volumes:
+  mongo:
