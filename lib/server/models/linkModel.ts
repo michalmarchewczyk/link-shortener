@@ -38,6 +38,20 @@ const linkSchema = new Schema({
     default: Date.now,
     immutable: true,
   },
+  updated: {
+    type: Date,
+    default: Date.now,
+  },
+  editable: {
+    type: Boolean,
+    default: false,
+    immutable: true,
+  },
+  editToken: {
+    type: String,
+    default: (val: { editable: boolean }) => (val.editable ? cryptoRandomString({ length: 32, type: 'base64' }) : null),
+    select: false,
+  },
 });
 
 const Link: Model<LinkType> = models.Link || model('Link', linkSchema);
