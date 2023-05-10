@@ -1,20 +1,47 @@
 import '@/styles/globals.scss';
 import type { AppProps } from 'next/app';
-import { MantineProvider } from '@mantine/core';
+import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { emotionCache } from '@/lib/emotion-cache';
 import Layout from '@/components/layout';
 import { Poppins } from 'next/font/google';
+import { useState } from 'react';
+import { useColorScheme, useLocalStorage } from '@mantine/hooks';
 
 const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'] });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const preferredColorScheme = useColorScheme();
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: preferredColorScheme,
+    getInitialValueInEffect: true,
+  });
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
   return (
-    <div className={poppins.className}>
-      <MantineProvider withGlobalStyles withNormalizeCSS withCSSVariables emotionCache={emotionCache}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </MantineProvider>
+    <div className={poppins.className} data-dark-scheme={colorScheme === 'dark' ? true : undefined}>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          withCSSVariables
+          emotionCache={emotionCache}
+          theme={{
+            colorScheme,
+            globalStyles: (theme) => ({
+              body: {
+                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[1],
+                color: theme.colorScheme === 'dark' ? theme.colors.gray[0] : theme.colors.dark[9],
+              },
+            }),
+          }}
+        >
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </div>
   );
 }

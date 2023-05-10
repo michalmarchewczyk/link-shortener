@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Burger, Container, MediaQuery, Tooltip } from '@mantine/core';
+import { Burger, Container, MediaQuery, Tooltip, useMantineColorScheme } from '@mantine/core';
 import { useHover, useMergedRef, useMouse } from '@mantine/hooks';
 import logotype from '@/assets/logotype-link.svg';
+import logotypeWhite from '@/assets/logotype-link-white.svg';
 import logo from '@/assets/logo.svg';
 import github from '@/assets/github.svg';
+import githubWhite from '@/assets/github-white.svg';
 import Link from 'next/link';
 import Image from 'next/image';
 import classes from './Navbar.module.scss';
@@ -13,6 +15,7 @@ function Navbar() {
   const { ref: refMouse, x, y } = useMouse();
   const { hovered, ref: refHover } = useHover();
   const ref = useMergedRef(refMouse, refHover);
+  const { colorScheme } = useMantineColorScheme();
 
   return (
     <>
@@ -21,7 +24,7 @@ function Navbar() {
           <div className={classes.Navbar} ref={ref}>
             <Link href="/">
               <MediaQuery styles={{ display: 'none !important' }} smallerThan="md">
-                <Image src={logotype} alt="" height={80} width={346} />
+                <Image src={colorScheme === 'dark' ? logotypeWhite : logotype} alt="" height={80} width={346} />
               </MediaQuery>
               <MediaQuery styles={{ display: 'none !important' }} largerThan="md">
                 <Image src={logo} alt="" height={80} width={80} />
@@ -48,7 +51,7 @@ function Navbar() {
               zIndex={100000}
             >
               <a href="https://github.com/michalmarchewczyk/link-shortener" target="_blank" rel="noreferrer">
-                <Image src={github} alt="Source code" height={30} width={30} />
+                <Image src={colorScheme === 'dark' ? githubWhite : github} alt="Source code" height={30} width={30} />
               </a>
             </Tooltip>
           </div>
@@ -86,7 +89,7 @@ function Navbar() {
               Edit
             </Link>
             <a href="https://github.com/michalmarchewczyk/link-shortener" target="_blank" rel="noreferrer">
-              <Image src={github} alt="Source code" />
+              <Image src={colorScheme === 'dark' ? githubWhite : github} alt="Source code" height={80} width={80} />
             </a>
           </div>
         </div>
