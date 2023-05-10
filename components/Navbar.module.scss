@@ -1,0 +1,185 @@
+.NavbarContainer {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  height: 0;
+}
+
+.Navbar {
+  position: relative;
+  display: flex;
+  column-gap: 45px;
+  top: 15px;
+  left: 0;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px rgb(0, 0, 0, 0.1);
+  z-index: 10000;
+  padding-right: 40px;
+  padding-left: 10px;
+  overflow: hidden;
+
+  a:first-child {
+    display: block;
+    align-self: stretch;
+    img {
+      position: absolute;
+      height: 100%;
+      padding: 8px;
+    }
+  }
+
+  div {
+    flex: 1;
+  }
+
+  figure {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: red;
+    margin-left: -201px;
+    margin-top: -201px;
+    z-index: -1;
+    background: radial-gradient(
+      closest-side,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7) 10%,
+      rgba(255, 255, 255, 0)
+    );
+    transition: opacity 0.2s linear;
+  }
+
+  a:last-child {
+    display: block;
+    align-self: stretch;
+    img {
+      height: 100%;
+      width: 30px;
+      object-fit: contain;
+      padding: 24px 0;
+      margin-top: -1px;
+    }
+  }
+}
+
+.NavbarMobile {
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 40px;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  transition: height 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  overflow: hidden;
+  padding-right: 30px;
+  padding-left: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgb(0, 0, 0, 0.1);
+  justify-content: space-between;
+  z-index: 10000;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: -2;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    z-index: -1;
+  }
+
+  > a:first-child {
+    display: block;
+    height: 80px;
+    img {
+      height: 80px;
+      padding: 8px;
+    }
+  }
+
+  button {
+    margin-top: 18px;
+  }
+}
+
+.LinksMobile {
+  width: 100%;
+  height: calc(100% - 80px);
+  padding: 40px;
+
+  a:last-child {
+    display: block;
+    margin-top: 60px;
+  }
+}
+
+.LinkMobile {
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 50px;
+  margin-top: 20px;
+  text-transform: capitalize;
+  display: block;
+  position: relative;
+  &::after {
+    content: '';
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 6px;
+    background-color: black;
+    transition: all 0.1s cubic-bezier(0.32, 0, 0.67, 0);
+  }
+  &:hover::after {
+    width: 100%;
+    transition: all 0.15s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+}
+
+.Link {
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 20px;
+  text-transform: capitalize;
+  &::after {
+    content: '';
+    display: block;
+    position: relative;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: black;
+    transition: all 0.1s cubic-bezier(0.32, 0, 0.67, 0);
+  }
+  &:hover::after {
+    width: 100%;
+    left: 0;
+    transition: all 0.15s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+}
