@@ -4,10 +4,9 @@ import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core
 import { emotionCache } from '@/lib/emotion-cache';
 import Layout from '@/components/layout';
 import { Poppins } from 'next/font/google';
-import { useState } from 'react';
 import { useColorScheme, useLocalStorage } from '@mantine/hooks';
 
-const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'] });
+const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'], variable: '--poppins-font' });
 
 export default function App({ Component, pageProps }: AppProps) {
   const preferredColorScheme = useColorScheme();
@@ -29,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
           emotionCache={emotionCache}
           theme={{
             colorScheme,
+            fontFamily: 'var(--poppins-font), sans-serif',
             globalStyles: (theme) => ({
               body: {
                 backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[1],
