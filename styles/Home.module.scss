@@ -11,6 +11,10 @@
       border: 2px solid rgba(255, 255, 255, 0.05);
       color: white;
     }
+    &[data-invalid='true'] {
+      color: var(--mantine-color-red-6) !important;
+      border-color: var(--mantine-color-red-6) !important;
+    }
     &:focus {
       background: rgba(255, 255, 255, 0.9);
       border-color: rgba(255, 255, 255, 1);

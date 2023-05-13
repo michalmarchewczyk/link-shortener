@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   try {
     const link = await Link.create({
       url: body.url,
-      slug: body.slug,
+      slug: body.slug || undefined,
       editable: body.editable,
     });
 

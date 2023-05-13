@@ -1,26 +1,36 @@
 import Head from 'next/head';
 import { Box, Flex, Switch, TextInput, Title } from '@mantine/core';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { IconForms, IconLink, IconChevronRight, IconLoader2 } from '@tabler/icons-react';
 import classes from '@/styles/Home.module.scss';
 import CustomButton from '@/components/CustomButton';
 import { useRouter } from 'next/router';
+import { useForm } from '@mantine/form';
+import validator from 'validator';
 
 export default function Home() {
-  const [url, setUrl] = useState<string>('');
-  const [customSlug, setCustomSlug] = useState<string>('');
-  const [editable, setEditable] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const form = useForm({
+    initialValues: {
+      url: '',
+      slug: '',
+      editable: false,
+    },
+    validate: {
+      url: (value) => (validator.isURL(value) ? null : 'Invalid URL'),
+      slug: (value) => (!value || validator.isSlug(value) ? null : 'Invalid slug'),
+    },
+    validateInputOnBlur: true,
+  });
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const submit = async (e?: FormEvent) => {
-    e?.preventDefault();
+  const submit = async ({ url, slug, editable }: { url: string; slug: string; editable: boolean }) => {
     setLoading(true);
     const res = await fetch('/api/links', {
       method: 'POST',
       body: JSON.stringify({
         url,
-        slug: customSlug,
+        slug,
         editable,
       }),
       headers: {
@@ -28,10 +38,13 @@ export default function Home() {
       },
     });
     const data = await res.json();
-    setLoading(false);
+    if (data.error) {
+      form.setErrors(data.error);
+    }
     if (data.slug) {
       await router.push(`/view/${data.slug}`);
     }
+    setLoading(false);
   };
 
   return (
@@ -40,7 +53,7 @@ export default function Home() {
         <title>Create - Marchewczyk.link</title>
       </Head>
 
-      <Box component="form" onSubmit={submit} h="100%">
+      <Box component="form" onSubmit={form.onSubmit(submit)} h="100%">
         <Flex direction="column" align="center" gap={40} justify="center" h="100%">
           <Title order={1}>Shorten link:</Title>
           <TextInput
@@ -56,8 +69,7 @@ export default function Home() {
                 paddingLeft: '6px',
               },
             }}
-            value={url}
-            onChange={(e) => setUrl(e.currentTarget.value)}
+            {...form.getInputProps('url')}
           />
           <TextInput
             className={classes.Input}
@@ -66,14 +78,13 @@ export default function Home() {
             placeholder="Custom slug (leave empty for random)"
             w="100%"
             maw="36rem"
-            value={customSlug}
-            onChange={(e) => setCustomSlug(e.currentTarget.value)}
             icon={<IconForms size="1.6rem" />}
             styles={{
               icon: {
                 paddingLeft: '6px',
               },
             }}
+            {...form.getInputProps('slug')}
           />
           <Switch
             label="Editable"
@@ -83,13 +94,13 @@ export default function Home() {
             maw="36rem"
             className={classes.Switch}
             color="dark"
-            checked={editable}
-            onChange={() => setEditable((v) => !v)}
+            {...form.getInputProps('editable', { type: 'checkbox' })}
           />
           <CustomButton
             label="Shorten"
-            icon={loading ? <IconLoader2 size="1.8rem" /> : <IconChevronRight size="1.8rem" />}
-            onClick={() => submit()}
+            disabled={loading || !form.isValid() || !form.isDirty()}
+            icon={loading ? <IconLoader2 size="1.6rem" /> : <IconChevronRight size="1.8rem" />}
+            type="submit"
           />
         </Flex>
       </Box>

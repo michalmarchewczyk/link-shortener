@@ -2,9 +2,26 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  //background: var(--mantine-color-white) !important;
 }
 
 * {
   font-family: var(--poppins-font), sans-serif;
+}
+
+.tabler-icon-loader-2 {
+  animation: spin 1.4s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.mantine-InputWrapper-error {
+  font-weight: 500;
+  margin-left: 20px;
 }
