@@ -2,7 +2,7 @@
   input {
     background: rgba(255, 255, 255, 0.7);
     border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 0px 36px rgba(255, 255, 255, 0);
+    box-shadow: 0 0 36px rgba(255, 255, 255, 0);
     transition: all 0.1s linear;
     color: black;
     font-weight: 500;
@@ -18,11 +18,11 @@
     &:focus {
       background: rgba(255, 255, 255, 0.9);
       border-color: rgba(255, 255, 255, 1);
-      box-shadow: 0px 0px 36px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 36px rgba(255, 255, 255, 0.3);
       [data-dark-scheme] & {
         background: rgba(0, 0, 0, 0.9);
         border-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0px 0px 36px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 36px rgba(255, 255, 255, 0.1);
       }
     }
   }

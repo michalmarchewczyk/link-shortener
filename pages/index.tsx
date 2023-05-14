@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Box, Flex, Switch, TextInput, Title } from '@mantine/core';
 import { useState } from 'react';
 import { IconForms, IconLink, IconChevronRight, IconLoader2 } from '@tabler/icons-react';
-import classes from '@/styles/Home.module.scss';
+import classes from '@/styles/Forms.module.scss';
 import CustomButton from '@/components/CustomButton';
 import { useRouter } from 'next/router';
 import { useForm } from '@mantine/form';
@@ -99,7 +99,7 @@ export default function Home() {
           <CustomButton
             label="Shorten"
             disabled={loading || !form.isValid() || !form.isDirty()}
-            icon={loading ? <IconLoader2 size="1.6rem" /> : <IconChevronRight size="1.8rem" />}
+            iconRight={loading ? <IconLoader2 size="1.6rem" /> : <IconChevronRight size="1.8rem" />}
             type="submit"
           />
         </Flex>

@@ -5,13 +5,15 @@ import classes from './CustomButton.module.scss';
 
 function CustomButton({
   label,
-  icon,
+  iconRight,
+  iconLeft,
   onClick,
   disabled,
   type,
 }: {
   label: string;
-  icon: React.ReactNode;
+  iconRight?: React.ReactNode;
+  iconLeft?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
@@ -22,8 +24,9 @@ function CustomButton({
 
   return (
     <UnstyledButton className={classes.Button} onClick={onClick} ref={ref} disabled={disabled} type={type}>
+      {iconLeft}
       <Text>{label}</Text>
-      {icon}
+      {iconRight}
       <figure style={{ left: x, top: y, opacity: hovered ? 1 : 0 }} />
     </UnstyledButton>
   );

@@ -1,5 +1,4 @@
 import Link, { LinkType } from '@/lib/server/models/linkModel';
-import '@/lib/server/database';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Error as MongooseErrors } from 'mongoose';
 
@@ -9,7 +8,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const { method, query, body } = req;
   if (method === 'GET') {
     try {
-      const found = await Link.findOneAndUpdate({ slug: query.slug }, { $inc: { clicks: 1 } }, { new: true });
+      const found = await Link.findOneAndUpdate(
+        { slug: query.slug },
+        { $inc: { clicks: query.preview ? 0 : 1 } },
+        { new: true },
+      );
       if (found) {
         res.json(found);
       } else {

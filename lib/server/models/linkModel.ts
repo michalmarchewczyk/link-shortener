@@ -1,6 +1,7 @@
 import { InferSchemaType, Model, model, models, Schema } from 'mongoose';
 import cryptoRandomString from 'crypto-random-string';
 import validator from 'validator';
+import '@/lib/server/database';
 
 const linkSchema = new Schema({
   url: {

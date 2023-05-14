@@ -1,6 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import '@/lib/server/database';
 import Link, { LinkType } from '@/lib/server/models/linkModel';
 import { MongoServerError } from 'mongodb';
 import { Error as MongooseErrors } from 'mongoose';
