@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
             fontFamily: 'var(--poppins-font), sans-serif',
             globalStyles: (theme) => ({
               body: {
-                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[1],
+                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2],
                 color: theme.colorScheme === 'dark' ? theme.colors.gray[0] : theme.colors.dark[9],
               },
             }),
