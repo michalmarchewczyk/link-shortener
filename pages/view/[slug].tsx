@@ -1,6 +1,6 @@
 import React from 'react';
 import Link, { LinkType } from '@/lib/server/models/linkModel';
-import { Flex, Title, Text, Box } from '@mantine/core';
+import { Flex, Title, Text, Box, Anchor } from '@mantine/core';
 import classes from '@/styles/View.module.scss';
 import CustomButton from '@/components/CustomButton';
 import { IconChevronLeft } from '@tabler/icons-react';
@@ -42,6 +42,13 @@ function ViewSlug({ slug, found }: { slug: string; found: LinkType | null }) {
       <Flex direction="column" align="center" gap={40} justify="center" h="100%">
         <Title order={1}>Preview Link</Title>
         <Box className={classes.Box}>
+          <Text fz="lg" fw={500} component="span">
+            Shortened:
+          </Text>
+          <Anchor fz="lg" fw={700} ml={10} color="primary" href={`https://marchewczyk.link/${found.slug}`}>
+            https://marchewczyk.link/{found.slug}
+          </Anchor>
+          <br />
           <Text fz="lg" fw={500} component="span">
             Slug:
           </Text>

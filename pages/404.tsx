@@ -10,7 +10,7 @@ function NotFound() {
   return (
     <>
       <Head>
-        <title>Page Not Found - marchewczyk.link</title>
+        <title>Page Not Found - Marchewczyk.link</title>
       </Head>
 
       <Flex align="center" justify="center" direction="column" h="100%" gap={40}>
