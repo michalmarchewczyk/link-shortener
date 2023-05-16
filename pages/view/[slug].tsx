@@ -6,6 +6,7 @@ import CustomButton from '@/components/CustomButton';
 import { IconChevronLeft } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { APP_NAME, APP_URL } from '@/lib/constants';
 
 export async function getServerSideProps({ params: { slug } }: { params: { slug: string } }) {
   const found = await Link.findOne({ slug }, { _id: 0, __v: 0 });
@@ -36,7 +37,7 @@ function ViewSlug({ slug, found }: { slug: string; found: LinkType | null }) {
   return (
     <>
       <Head>
-        <title>Preview link - Marchewczyk.link</title>
+        <title>Preview link - {APP_NAME}</title>
       </Head>
 
       <Flex direction="column" align="center" gap={40} justify="center" h="100%">
@@ -45,8 +46,8 @@ function ViewSlug({ slug, found }: { slug: string; found: LinkType | null }) {
           <Text fz="lg" fw={500} component="span">
             Shortened:
           </Text>
-          <Anchor fz="lg" fw={700} ml={10} color="primary" href={`https://marchewczyk.link/${found.slug}`}>
-            https://marchewczyk.link/{found.slug}
+          <Anchor fz="lg" fw={700} ml={10} color="primary" href={`${APP_URL}/${found.slug}`}>
+            {APP_URL}/{found.slug}
           </Anchor>
           <br />
           <Text fz="lg" fw={500} component="span">

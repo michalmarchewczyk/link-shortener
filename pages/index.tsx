@@ -17,6 +17,7 @@ import validator from 'validator';
 import { useClipboard, useDisclosure } from '@mantine/hooks';
 import { LinkType } from '@/lib/server/models/linkModel';
 import Link from 'next/link';
+import { APP_NAME } from '@/lib/constants';
 
 export default function Home() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -70,7 +71,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Shorten - Marchewczyk.link</title>
+        <title>Shorten - {APP_NAME}</title>
       </Head>
 
       <Modal

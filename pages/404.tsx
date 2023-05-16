@@ -4,13 +4,14 @@ import { Flex, Text, Title } from '@mantine/core';
 import CustomButton from '@/components/CustomButton';
 import { IconHome } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
+import { APP_NAME } from '@/lib/constants';
 
 function NotFound() {
   const router = useRouter();
   return (
     <>
       <Head>
-        <title>Page Not Found - Marchewczyk.link</title>
+        <title>Page Not Found - {APP_NAME}</title>
       </Head>
 
       <Flex align="center" justify="center" direction="column" h="100%" gap={40}>

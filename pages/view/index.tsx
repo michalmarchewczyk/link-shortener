@@ -7,6 +7,7 @@ import { useForm } from '@mantine/form';
 import validator from 'validator';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { APP_NAME } from '@/lib/constants';
 
 export default function Index() {
   const form = useForm({
@@ -41,7 +42,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>View - Marchewczyk.link</title>
+        <title>View - {APP_NAME}</title>
       </Head>
 
       <Box component="form" onSubmit={form.onSubmit(submit)} h="100%">

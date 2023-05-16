@@ -8,6 +8,7 @@ import validator from 'validator';
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
+import { APP_NAME } from '@/lib/constants';
 
 export default function Edit() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -56,7 +57,7 @@ export default function Edit() {
   return (
     <>
       <Head>
-        <title>Edit - Marchewczyk.link</title>
+        <title>Edit - {APP_NAME}</title>
       </Head>
 
       <Modal
