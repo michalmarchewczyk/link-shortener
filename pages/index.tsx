@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Create - Marchewczyk.link</title>
+        <title>Shorten - Marchewczyk.link</title>
       </Head>
 
       <Modal

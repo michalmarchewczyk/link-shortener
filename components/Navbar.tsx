@@ -33,7 +33,7 @@ function Navbar() {
             <div />
             <figure style={{ left: x, top: y, opacity: hovered ? 1 : 0 }} />
             <Link href="/" className={classes.Link}>
-              Create
+              Shorten
             </Link>
             <Link href="/view" className={classes.Link}>
               View
@@ -80,7 +80,7 @@ function Navbar() {
           />
           <div className={classes.LinksMobile}>
             <Link href="/" className={classes.LinkMobile} onClick={() => setOpened(false)}>
-              Create
+              Shorten
             </Link>
             <Link href="/view" className={classes.LinkMobile} onClick={() => setOpened(false)}>
               View

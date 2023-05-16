@@ -41,7 +41,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Index - Marchewczyk.link</title>
+        <title>View - Marchewczyk.link</title>
       </Head>
 
       <Box component="form" onSubmit={form.onSubmit(submit)} h="100%">
