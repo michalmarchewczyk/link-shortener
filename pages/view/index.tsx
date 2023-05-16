@@ -5,7 +5,7 @@ import { IconChevronRight, IconForms, IconLoader2 } from '@tabler/icons-react';
 import CustomButton from '@/components/CustomButton';
 import { useForm } from '@mantine/form';
 import validator from 'validator';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { APP_NAME } from '@/lib/constants';
 
@@ -39,10 +39,12 @@ export default function Index() {
     setLoading(false);
   };
 
+  const pageTitle = `View - ${APP_NAME}`;
+
   return (
     <>
       <Head>
-        <title>View - {APP_NAME}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <Box component="form" onSubmit={form.onSubmit(submit)} h="100%">

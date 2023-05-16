@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { ActionIcon, Box, Button, Text, Code, Flex, Modal, Switch, TextInput, Title, Tooltip } from '@mantine/core';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   IconForms,
   IconLink,
@@ -68,10 +68,12 @@ export default function Home() {
     setLoading(false);
   };
 
+  const pageTitle = `Shorten - ${APP_NAME}`;
+
   return (
     <>
       <Head>
-        <title>Shorten - {APP_NAME}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <Modal

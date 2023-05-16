@@ -21,23 +21,33 @@ export async function getServerSideProps({ params: { slug } }: { params: { slug:
 function ViewSlug({ slug, found }: { slug: string; found: LinkType | null }) {
   const router = useRouter();
 
+  const pageTitle = `Preview link - ${APP_NAME}`;
+
   if (!found) {
     return (
-      <Flex direction="column" align="center" gap={40} justify="center" h="100%">
-        <Title order={1}>Link not found</Title>
-        <Text fz="lg">Link with slug &quot;{slug}&quot; was not found</Text>
-        <CustomButton
-          label="Go back"
-          iconLeft={<IconChevronLeft size="1.8rem" />}
-          onClick={() => router.push('/view')}
-        />
-      </Flex>
+      <>
+        <Head>
+          <title>{pageTitle}</title>
+        </Head>
+        <Flex direction="column" align="center" gap={40} justify="center" h="100%">
+          <Title order={1}>Link not found</Title>
+          <Text fz="lg" fw={600}>
+            Link with slug &quot;{slug}&quot; was not found
+          </Text>
+          <CustomButton
+            label="Go back"
+            iconLeft={<IconChevronLeft size="1.8rem" />}
+            onClick={() => router.push('/view')}
+          />
+        </Flex>
+      </>
     );
   }
+
   return (
     <>
       <Head>
-        <title>Preview link - {APP_NAME}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <Flex direction="column" align="center" gap={40} justify="center" h="100%">

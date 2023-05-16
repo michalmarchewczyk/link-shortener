@@ -5,7 +5,7 @@ import { IconCheck, IconExternalLink, IconForms, IconKey, IconLink, IconLoader2 
 import CustomButton from '@/components/CustomButton';
 import { useForm } from '@mantine/form';
 import validator from 'validator';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
@@ -54,10 +54,12 @@ export default function Edit() {
     setLoading(false);
   };
 
+  const pageTitle = `Edit - ${APP_NAME}`;
+
   return (
     <>
       <Head>
-        <title>Edit - {APP_NAME}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <Modal

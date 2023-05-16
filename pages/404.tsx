@@ -8,10 +8,13 @@ import { APP_NAME } from '@/lib/constants';
 
 function NotFound() {
   const router = useRouter();
+
+  const pageTitle = `Page Not Found - ${APP_NAME}`;
+
   return (
     <>
       <Head>
-        <title>Page Not Found - {APP_NAME}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <Flex align="center" justify="center" direction="column" h="100%" gap={40}>
