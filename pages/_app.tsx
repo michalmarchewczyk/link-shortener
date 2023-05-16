@@ -6,7 +6,11 @@ import Layout from '@/components/layout';
 import { Poppins } from 'next/font/google';
 import { useColorScheme, useLocalStorage } from '@mantine/hooks';
 
-const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'], variable: '--poppins-font' });
+const poppins = Poppins({
+  subsets: ['latin-ext'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--poppins-font',
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const preferredColorScheme = useColorScheme();
