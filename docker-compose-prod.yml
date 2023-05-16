@@ -6,13 +6,14 @@ services:
       context: .
       dockerfile: Dockerfile
       target: prod
+      args:
+        NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
     command: npm run start
     ports:
-      - "3000:80"
-    volumes:
-      - .:/app
+      - "80:3000"
     environment:
-      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/link-shortener
+      MONGO_URI: "mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/"
     links:
       - mongo
   mongo:
