@@ -81,6 +81,7 @@ export default function Home() {
         classNames={{ content: classes.Modal, overlay: classes.ModalOverlay }}
         zIndex={10000}
         withinPortal={false}
+        size={400}
       >
         <Flex direction="column" align="center" gap={12}>
           <Title order={2} fz={26} align="center" mb={10} mt={4}>
