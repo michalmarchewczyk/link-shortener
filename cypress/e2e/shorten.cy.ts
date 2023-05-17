@@ -1,4 +1,16 @@
 describe('Shorten', () => {
+  before(() => {
+    cy.wrap(
+      Cypress.automation('remote:debugger:protocol', {
+        command: 'Browser.grantPermissions',
+        params: {
+          permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'],
+          origin: window.location.origin,
+        },
+      }),
+    );
+  });
+
   it('create shortened link', () => {
     cy.visit('/');
 
