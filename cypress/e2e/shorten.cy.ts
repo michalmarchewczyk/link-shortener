@@ -12,7 +12,7 @@ describe('Shorten', () => {
     cy.contains('div', 'Shortened').should('include.text', 'Views:0');
   });
 
-  it.skip('create shortened link with custom slug', () => {
+  it('create shortened link with custom slug', () => {
     cy.visit('/');
 
     cy.get('input[placeholder="Your URL"]').type('https://example.com');
@@ -42,7 +42,7 @@ describe('Shorten', () => {
     cy.contains('div', 'Link created').should('include.text', 'Edit token');
 
     cy.get('code').invoke('text').invoke('slice', 0, 32).as('editToken');
-    cy.get('code').find('button').focus().click();
+    cy.get('code').find('button').click();
 
     cy.get<string>('@editToken').then((editToken) => {
       cy.assertValueCopiedToClipboard(editToken);
