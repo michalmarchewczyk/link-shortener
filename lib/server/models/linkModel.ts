@@ -3,6 +3,8 @@ import cryptoRandomString from 'crypto-random-string';
 import validator from 'validator';
 import '@/lib/server/database';
 
+const BANNED_SLUGS = ['admin', 'api', 'create', 'view', 'preview', 'edit'];
+
 const linkSchema = new Schema({
   url: {
     type: String,
@@ -26,7 +28,7 @@ const linkSchema = new Schema({
     minLength: ['2', 'Slug must be at least 2 characters long'],
     maxLength: ['60', 'Slug must be at most 60 characters long'],
     validate: {
-      validator: (slug: string) => validator.isSlug(slug.toLowerCase()),
+      validator: (slug: string) => validator.isSlug(slug.toLowerCase()) && !validator.isIn(slug, BANNED_SLUGS),
       message: () => 'Slug must contain only alphanumeric characters or hyphens',
     },
   },
