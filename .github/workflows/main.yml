@@ -18,6 +18,26 @@ jobs:
         run: npm install
       - name: Run ESLint
         run: npm run lint
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Run prod server
+        run: docker-compose -f docker-compose-prod.yml up -d
+        env:
+          NEXT_PUBLIC_APP_NAME: Link Shortener
+          NEXT_PUBLIC_APP_URL: "http://localhost"
+          MONGO_USERNAME: admin
+          MONGO_PASSWORD: password
+      - name: Run cypress
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          wait-on: http://localhost
   build:
     runs-on: ubuntu-latest
     steps:
