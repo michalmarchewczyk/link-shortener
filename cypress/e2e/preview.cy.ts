@@ -33,4 +33,20 @@ describe('Preview', () => {
     cy.contains('button', 'Go back').click();
     cy.location('pathname').should('equal', '/view');
   });
+
+  it('validate slug', () => {
+    cy.visit('/view');
+
+    [' ', 'test slug', '-test-slug', 'test-slug-', 'ąęóżść', '@#$#$', 'aa'].forEach((slug) => {
+      cy.get('input[placeholder^="Slug"]').clear();
+      cy.get('input[placeholder^="Slug"]').type(slug);
+      cy.get('input[placeholder^="Slug"]').blur();
+      cy.contains('button', 'View').should('be.disabled');
+      cy.contains('div', 'Invalid slug').should('exist');
+    });
+    cy.get('input[placeholder^="Slug"]').clear();
+    cy.get('input[placeholder^="Slug"]').type('test-slug');
+    cy.contains('button', 'View').should('not.be.disabled');
+    cy.contains('div', 'Invalid slug').should('not.exist');
+  });
 });

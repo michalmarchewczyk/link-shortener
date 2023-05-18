@@ -49,4 +49,42 @@ describe('Edit', () => {
     cy.contains('div', 'Shortened').should('include.text', 'https://google.com');
     cy.contains('div', 'Shortened').should('include.text', 'Views:0');
   });
+
+  it('validate url, slug and edit token', () => {
+    cy.visit('/edit');
+
+    [' ', 'example', 'example .com', 'ssh://example.com'].forEach((url) => {
+      cy.get('input[placeholder="New URL"]').clear();
+      cy.get('input[placeholder="New URL"]').type(url);
+      cy.get('input[placeholder="New URL"]').blur();
+      cy.contains('button', 'Save').should('be.disabled');
+      cy.contains('div', 'Invalid URL').should('exist');
+    });
+    cy.get('input[placeholder="New URL"]').clear();
+    cy.get('input[placeholder="New URL"]').type('https://example.com');
+    cy.contains('div', 'Invalid URL').should('not.exist');
+
+    [' ', 'test slug', '-test-slug', 'test-slug-', 'ąęóżść', '@#$#$', 'aa'].forEach((slug) => {
+      cy.get('input[placeholder^="Slug"]').clear();
+      cy.get('input[placeholder^="Slug"]').type(slug);
+      cy.get('input[placeholder^="Slug"]').blur();
+      cy.contains('button', 'Save').should('be.disabled');
+      cy.contains('div', 'Invalid slug').should('exist');
+    });
+    cy.get('input[placeholder^="Slug"]').clear();
+    cy.get('input[placeholder^="Slug"]').type('test-slug');
+    cy.contains('div', 'Invalid slug').should('not.exist');
+
+    [' ', 'wrong token', Array(32).fill('ą').join('')].forEach((token) => {
+      cy.get('input[placeholder="Edit token"]').clear();
+      cy.get('input[placeholder="Edit token"]').type(token);
+      cy.get('input[placeholder="Edit token"]').blur();
+      cy.contains('button', 'Save').should('be.disabled');
+      cy.contains('div', 'Invalid edit token').should('exist');
+    });
+    cy.get('input[placeholder="Edit token"]').clear();
+    cy.get('input[placeholder="Edit token"]').type(Array(32).fill('a').join(''));
+    cy.contains('button', 'Save').should('not.be.disabled');
+    cy.contains('div', 'Invalid edit token').should('not.exist');
+  });
 });
