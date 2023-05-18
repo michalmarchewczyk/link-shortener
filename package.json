@@ -37,6 +37,7 @@
     "cypress": "^12.12.0",
     "eslint-config-mantine": "^2.0.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "sass": "^1.62.1"
