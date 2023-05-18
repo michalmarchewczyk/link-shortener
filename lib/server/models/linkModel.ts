@@ -22,10 +22,10 @@ const linkSchema = new Schema({
   },
   slug: {
     type: String,
-    default: () => cryptoRandomString({ length: 8, type: 'alphanumeric' }),
+    default: () => cryptoRandomString({ length: 10, type: 'alphanumeric' }).toLowerCase(),
     unique: true,
     trim: true,
-    minLength: ['2', 'Slug must be at least 2 characters long'],
+    minLength: ['3', 'Slug must be at least 3 characters long'],
     maxLength: ['60', 'Slug must be at most 60 characters long'],
     validate: {
       validator: (slug: string) => validator.isSlug(slug.toLowerCase()) && !validator.isIn(slug, BANNED_SLUGS),
