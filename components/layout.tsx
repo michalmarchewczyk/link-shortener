@@ -20,14 +20,28 @@ function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </Container>
       <ThemeSwitch />
-      <Image
-        src={colorScheme === 'dark' ? background : backgroundWhite}
-        alt=""
-        fill
-        quality={100}
-        priority
-        style={{ zIndex: -1, opacity: colorScheme === 'dark' ? 0.4 : 0.7 }}
-      />
+      {colorScheme === 'dark' && (
+        <Image
+          src={background}
+          alt=""
+          fill
+          quality={100}
+          priority
+          style={{ zIndex: -1, opacity: 0.4 }}
+          placeholder="blur"
+        />
+      )}
+      {colorScheme !== 'dark' && (
+        <Image
+          src={backgroundWhite}
+          alt=""
+          fill
+          quality={100}
+          priority
+          style={{ zIndex: -1, opacity: 0.7 }}
+          placeholder="blur"
+        />
+      )}
     </>
   );
 }
