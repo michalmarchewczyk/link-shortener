@@ -22,6 +22,15 @@ describe('Shorten', () => {
 
     cy.contains('div', 'Shortened').should('include.text', 'https://example.com');
     cy.contains('div', 'Shortened').should('include.text', 'Views:0');
+
+    cy.contains('span', 'Slug:').find('+ span').invoke('text').as('slug');
+
+    cy.get<string>('@slug').then((slug) => {
+      cy.visit(`/${slug}`);
+      cy.origin(`https://example.com`, () => {
+        cy.location('href').should('equal', `https://example.com/`);
+      });
+    });
   });
 
   it('create shortened link with custom slug', () => {
@@ -38,6 +47,11 @@ describe('Shorten', () => {
     cy.contains('div', 'Shortened').should('include.text', 'http://localhost/test-slug');
     cy.contains('div', 'Shortened').should('include.text', 'Slug:test-slug');
     cy.contains('div', 'Shortened').should('include.text', 'Views:0');
+
+    cy.visit('/test-slug');
+    cy.origin(`https://example.com`, () => {
+      cy.location('href').should('equal', `https://example.com/`);
+    });
   });
 
   it('create editable shortened link', () => {
